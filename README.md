@@ -1,16 +1,91 @@
-# React + Vite
+# Online Bookstore - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This project is the frontend application for the Online Bookstore.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+It consumes the Spring Boot backend APIs and provides a user interface for:
 
-## React Compiler
+* Login
+* Viewing Books
+* Adding Books to Cart
+* Updating Cart
+* Removing Items
+* Checkout
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Technology Stack
 
-## Expanding the ESLint configuration
+* React
+* React Router
+* Axios
+* Vite
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Prerequisites
+
+* Node.js 18+
+* npm
+
+## Clone Repository
+
+```bash
+git clone https://github.com/abhishekg1981992/bookstore-ui.git
+cd bookstore-ui
+```
+
+## Install Dependencies
+
+```bash
+npm install
+```
+
+## Start Application
+
+```bash
+npm run dev
+```
+
+Application URL:
+
+http://localhost:5173
+
+## Backend Requirement
+
+The backend application must be running before starting the frontend.
+
+Backend URL:
+
+http://localhost:8080
+
+Backend Repository:
+
+https://github.com/abhishekg1981992/online-bookstore.git
+
+## Application Flow
+
+1. Register a user using the backend API.
+2. Login using the frontend.
+3. Browse available books.
+4. Add books to cart.
+5. Manage cart items.
+6. Checkout and create an order.
+
+## Features Implemented
+
+* User Login
+* JWT Token Storage
+* Book Catalog Display
+* Shopping Cart Management
+* Checkout Flow
+* Order Confirmation
+
+## Notes
+
+The frontend expects the backend service to be running on:
+
+http://localhost:8080
+
+If the backend URL changes, update:
+
+```text
+src/services/api.js
+```
