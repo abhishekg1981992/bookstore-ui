@@ -10,26 +10,50 @@ function LoginPage() {
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    try {
-      const response = await login(username, password);
 
-      localStorage.setItem("token", response.token);
+    if (!username.trim()) {
+      alert("Username is required");
+      return;
+    }
+
+    if (!password.trim()) {
+      alert("Password is required");
+      return;
+    }
+
+    try {
+
+      const response =
+        await login(username, password);
+
+      localStorage.setItem(
+        "token",
+        response.token
+      );
 
       navigate("/books");
+
     } catch (error) {
-      alert("Login failed");
+
+      alert(
+        error.response?.data?.message ||
+        "Login failed"
+      );
     }
   };
 
   return (
     <div style={{ padding: "20px" }}>
+
       <h1>Online Book Store</h1>
 
       <div>
         <input
           placeholder="Username"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) =>
+            setUsername(e.target.value)
+          }
         />
       </div>
 
@@ -40,7 +64,9 @@ function LoginPage() {
           type="password"
           placeholder="Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) =>
+            setPassword(e.target.value)
+          }
         />
       </div>
 
@@ -49,6 +75,7 @@ function LoginPage() {
       <button onClick={handleLogin}>
         Login
       </button>
+
     </div>
   );
 }

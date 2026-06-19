@@ -6,76 +6,79 @@ import api from "../services/api";
 
 function BooksPage() {
 
-  const [books, setBooks] = useState([]);
+    const [books, setBooks] = useState([]);
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    loadBooks();
-  }, []);
+    useEffect(() => {
+        loadBooks();
+    }, []);
 
-  const loadBooks = async () => {
-    const data = await getBooks();
-    setBooks(data);
-  };
+    const loadBooks = async () => {
+        const data = await getBooks();
+        setBooks(data);
+    };
 
-  const addToCart = async (bookId) => {
+    const addToCart = async (bookId) => {
 
-    try {
+        try {
 
-      await api.post("/api/cart/items", {
-        bookId,
-        quantity: 1
-      });
+            await api.post("/api/cart/items", {
+                bookId,
+                quantity: 1
+            });
 
-      alert("Book added to cart");
+            alert("Book added to cart");
 
-    } catch (error) {
+        } catch (error) {
 
-      alert("Failed to add to cart");
-    }
-  };
+            alert(
+                error.response?.data?.message ||
+                "Failed to add to cart"
+            );
+        }
+    };
 
-  return (
-    <div style={{ padding: "20px" }}>
+    return (
+        <div style={{ padding: "20px" }}>
 
-      <h1>Books</h1>
+            <h1>Books</h1>
 
-      <button onClick={() => navigate("/cart")}>
-        View Cart
-      </button>
+            <button onClick={() => navigate("/cart")}>
+                View Cart
+            </button>
 
-      <hr />
+            <hr />
 
-      {books.map(book => (
+            {books.map(book => (
 
-        <div
-          key={book.id}
-          style={{
-            border: "1px solid gray",
-            marginBottom: "10px",
-            padding: "10px"
-          }}
-        >
+                <div
+                    key={book.id}
+                    style={{
+                        border: "1px solid gray",
+                        marginBottom: "10px",
+                        padding: "10px"
+                    }}
+                >
 
-          <h3>{book.title}</h3>
+                    <h3>{book.title}</h3>
 
-          <p>Author: {book.author}</p>
+                    <p>Author: {book.author}</p>
 
-          <p>Price: ${book.price}</p>
+                    <p>Price: ${book.price}</p>
 
-          <button
-            onClick={() => addToCart(book.id)}
-          >
-            Add To Cart
-          </button>
+                    <button
+                        onClick={() => addToCart(book.id)}
+                    >
+                        Add To Cart
+                    </button>
+
+                </div>
+
+            ))}
 
         </div>
-
-      ))}
-
-    </div>
-  );
+    );
 }
 
 export default BooksPage;

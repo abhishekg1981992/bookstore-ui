@@ -19,7 +19,10 @@ function CheckoutPage() {
 
     } catch (error) {
 
-      alert("Checkout failed");
+      alert(
+        error.response?.data?.message ||
+        "Checkout failed"
+      );
     }
   };
 
